@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#14213d">
+  <meta name="description" content="RotaAlerta: confira sua rota de rotina antes de sair.">
+  <title>RotaAlerta | Sua rotina, sem surpresas</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="RotaAlerta, página inicial">
+      <span class="brand-mark" aria-hidden="true">RA</span>
+      <span>Rota<span class="brand-light">Alerta</span></span>
+    </a>
+    <div class="server-pill"><span class="status-dot" id="serverDot"></span><span id="serverStatus">Verificando servidor...</span></div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">CITIZENTECH · MOBILIDADE URBANA</p>
+        <h1>Saiba como está sua rota <span>antes de sair.</span></h1>
+        <p class="hero-description">Acompanhe sua rota habitual, antecipe possíveis imprevistos e planeje seu deslocamento com mais tranquilidade.</p>
+        <div class="hero-note"><span aria-hidden="true">✦</span> Informação para decidir melhor o seu caminho.</div>
+      </div>
+      <div class="hero-illustration" aria-hidden="true">
+        <div class="route-line"></div>
+        <span class="route-pin pin-start">⌂</span>
+        <span class="route-pin pin-end">◎</span>
+        <span class="route-alert">!</span>
+        <div class="route-label label-a">ORIGEM</div>
+        <div class="route-label label-b">DESTINO</div>
+      </div>
+    </section>
+
+    <section class="dashboard-grid" aria-label="Painel de verificação de rota">
+      <article class="panel route-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SUA ROTINA</p>
+            <h2>Verificar caminho</h2>
+          </div>
+          <span class="step-badge">01 / 02</span>
+        </div>
+
+        <form id="routeForm">
+          <label for="routine">Nome da rotina</label>
+          <input id="routine" name="routine" type="text" maxlength="80" value="Faculdade" required>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label for="origin">Saindo de</label>
+              <input id="origin" name="origin" type="text" maxlength="80" value="Minha casa" required>
+            </div>
+            <div class="field-group">
+              <label for="destination">Indo para</label>
+              <input id="destination" name="destination" type="text" maxlength="80" value="FIAP" required>
+            </div>
+          </div>
+
+          <label for="scenario">Cenário para demonstração</label>
+          <select id="scenario" name="scenario">
+            <option value="normal">Rotina normal — sem ocorrências</option>
+            <option value="flood">Chuva forte — simular alagamento</option>
+            <option value="accident">Ocorrência — simular acidente</option>
+          </select>
+          <p class="field-hint">Escolha um cenário para testar como o RotaAlerta apresenta os avisos.</p>
+
+          <button class="primary-button" id="checkButton" type="submit">
+            <span>Verificar minha rota</span><span aria-hidden="true">→</span>
+          </button>
+          <p class="form-feedback" id="formFeedback" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <article class="panel result-panel" aria-live="polite">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">ANÁLISE DA ROTA</p>
+            <h2>Resumo do trajeto</h2>
+          </div>
+          <span class="result-icon" aria-hidden="true">↗</span>
+        </div>
+
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon" aria-hidden="true">⌁</div>
+          <h3>Seu caminho começa aqui</h3>
+          <p>Preencha sua rotina e selecione um cenário para visualizar os alertas.</p>
+        </div>
+
+        <div class="result-content hidden" id="resultContent">
+          <div class="route-summary">
+            <span id="routeOrigin">Minha casa</span><span class="summary-arrow" aria-hidden="true">→</span><span id="routeDestination">FIAP</span>
+          </div>
+          <div class="status-banner" id="statusBanner">
+            <span class="status-symbol" id="statusSymbol" aria-hidden="true">✓</span>
+            <div><strong id="statusTitle">Rota sem alertas</strong><p id="statusDescription"></p></div>
+          </div>
+          <div class="metric-grid">
+            <div class="metric-card"><span class="metric-label">Atraso estimado</span><strong id="delayMetric">0 min</strong><span class="metric-foot">no cenário selecionado</span></div>
+            <div class="metric-card"><span class="metric-label">Zona Azul</span><strong id="parkingMetric">8 vagas</strong><span class="metric-foot" id="parkingFoot">Disponibilidade ilustrativa</span></div>
+          </div>
+          <div class="recommendation" id="recommendationBox"><span aria-hidden="true">✦</span><div><strong>Recomendação</strong><p id="recommendationText"></p></div></div>
+          <div class="alternative-row"><span class="alternative-icon" aria-hidden="true">↪</span><div><span class="metric-label">Rota alternativa</span><p id="alternativeText"></p></div></div>
+          <p class="checked-time" id="checkedTime"></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="info-strip">
+      <div class="info-icon" aria-hidden="true">i</div>
+      <div><strong>Protótipo acadêmico — dados simulados</strong><p>Os alertas de trânsito, alagamento e vagas de Zona Azul são cenários demonstrativos. Esta versão não consulta sensores nem serviços de trânsito em tempo real.</p></div>
+    </section>
+
+    <section class="value-row" aria-label="Benefícios da solução">
+      <div><span class="value-icon">◷</span><div><strong>Antecipação</strong><p>Consulte antes de sair.</p></div></div>
+      <div><span class="value-icon">⌖</span><div><strong>Mais contexto</strong><p>Entenda o que pode afetar o caminho.</p></div></div>
+      <div><span class="value-icon">▤</span><div><strong>Planejamento</strong><p>Considere também a chegada.</p></div></div>
+    </section>
+
+    <footer><span>RotaAlerta · CitizenTech</span><span>Mobilidade mais simples, decisões melhores.</span></footer>
+  </main>
+</body>
+</html>

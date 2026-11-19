@@ -1,0 +1,22 @@
+[Unit]
+Description=RotaAlerta - Monitor de CPU, Memória e Disco
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=root
+EnvironmentFile=/etc/rotaalerta/rotaalerta.env
+ExecStart=/usr/bin/bash @APP_DIR@/ops/scripts/03-monitor.sh
+Restart=always
+RestartSec=10
+TimeoutStopSec=15
+KillSignal=SIGTERM
+Nice=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=rotaalerta-monitor
+
+[Install]
+WantedBy=multi-user.target

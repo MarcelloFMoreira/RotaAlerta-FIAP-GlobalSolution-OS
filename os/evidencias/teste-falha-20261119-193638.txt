@@ -1,0 +1,35 @@
+2026-11-19T19:36:38+00:00 Início do teste de falha. Testes: stress. Evidência: /home/vboxuser/Downloads/rotaalerta-main/os/evidencias/teste-falha-20261119-193638.txt
+2026-11-19T19:36:38+00:00 === TESTE 3: carga controlada de CPU, disco e RAM para disparar alertas ===
+2026-11-19T19:37:56+00:00 CPU: 5 processo(s) 'yes' ativos. Aguardando alerta do monitor...
+2026-11-19T19:43:10+00:00 RESULTADO alerta-cpu: PASSOU - monitor registrou ALERTA: CPU acima do limite
+2026-11-19T19:43:11+00:00 DISCO: uso levado a ~87%. Aguardando alerta do monitor...
+2026-11-19T19:43:13+00:00 RESULTADO alerta-disco: PASSOU - monitor registrou ALERTA: Disco da raiz acima do limite
+2026-11-19T19:43:22+00:00 RAM: 1972 MiB alocados (alvo ~35%). Aguardando alerta do monitor...
+2026-11-19T19:43:46+00:00 RESULTADO alerta-memoria: PASSOU - monitor registrou ALERTA: Memória RAM acima do limite
+2026-11-19T19:43:46+00:00 RESULTADO app-sob-carga: PASSOU - health check respondeu durante e após a carga
+2026-11-19T19:43:46+00:00 Linhas do monitor durante o teste:
+2026-11-19T19:40:12+00:00 [INFO] Recursos: CPU=0.9% RAM=14.2% DISCO_ROOT=33%
+2026-11-19T19:41:26+00:00 [INFO] Recursos: CPU=100.0% RAM=14.2% DISCO_ROOT=33%
+2026-11-19T19:41:41+00:00 [ALERTA] CPU acima do limite: 100.0% (limite 85%).
+2026-11-19T19:43:11+00:00 [INFO] Recursos: CPU=11.5% RAM=14.1% DISCO_ROOT=88%
+2026-11-19T19:43:11+00:00 [ALERTA] Disco da raiz acima do limite: 88% (limite 85%).
+2026-11-19T19:43:14+00:00 [INFO] Recursos: CPU=0.2% RAM=14.1% DISCO_ROOT=33%
+2026-11-19T19:43:45+00:00 [INFO] Recursos: CPU=0.4% RAM=35.1% DISCO_ROOT=33%
+2026-11-19T19:43:45+00:00 [ALERTA] Memória RAM acima do limite: 35.1% (limite 30%).
+$ journalctl -t rotaalerta-monitor -n 10 --no-pager -o short-iso
+2026-11-19T19:43:13+00:00 rotaalerta-server rotaalerta-monitor[1817]: Terminated                 sleep "$MONITOR_INTERVAL"
+2026-11-19T19:43:13+00:00 rotaalerta-server rotaalerta-monitor[5776]: 2026-11-19T19:43:13+00:00 [INFO] Monitor encerrado por sinal do sistema.
+2026-11-19T19:43:13+00:00 rotaalerta-server rotaalerta-monitor[5793]: 2026-11-19T19:43:13+00:00 [INFO] Monitor iniciado: intervalo=30s; limites CPU=85% RAM=30% DISCO=85%
+2026-11-19T19:43:14+00:00 rotaalerta-server rotaalerta-monitor[5806]: 2026-11-19T19:43:14+00:00 [INFO] Recursos: CPU=0.2% RAM=14.1% DISCO_ROOT=33%
+2026-11-19T19:43:45+00:00 rotaalerta-server rotaalerta-monitor[5906]: 2026-11-19T19:43:45+00:00 [INFO] Recursos: CPU=0.4% RAM=35.1% DISCO_ROOT=33%
+2026-11-19T19:43:45+00:00 rotaalerta-server rotaalerta-monitor[5911]: 2026-11-19T19:43:45+00:00 [ALERTA] Memória RAM acima do limite: 35.1% (limite 30%).
+2026-11-19T19:43:45+00:00 rotaalerta-server rotaalerta-monitor[5912]: Memória RAM acima do limite: 35.1% (limite 30%).
+2026-11-19T19:43:46+00:00 rotaalerta-server rotaalerta-monitor[5778]: Terminated                 sleep "$MONITOR_INTERVAL"
+2026-11-19T19:43:46+00:00 rotaalerta-server rotaalerta-monitor[5934]: 2026-11-19T19:43:46+00:00 [INFO] Monitor encerrado por sinal do sistema.
+2026-11-19T19:43:46+00:00 rotaalerta-server rotaalerta-monitor[5967]: 2026-11-19T19:43:46+00:00 [INFO] Monitor iniciado: intervalo=30s; limites CPU=85% RAM=85% DISCO=85%
+2026-11-19T19:43:46+00:00 === RESUMO ===
+alerta-cpu             PASSOU   monitor registrou ALERTA: CPU acima do limite
+alerta-disco           PASSOU   monitor registrou ALERTA: Disco da raiz acima do limite
+alerta-memoria         PASSOU   monitor registrou ALERTA: Memória RAM acima do limite
+app-sob-carga          PASSOU   health check respondeu durante e após a carga
+2026-11-19T19:43:47+00:00 Evidência salva em: /home/vboxuser/Downloads/rotaalerta-main/os/evidencias/teste-falha-20261119-193638.txt

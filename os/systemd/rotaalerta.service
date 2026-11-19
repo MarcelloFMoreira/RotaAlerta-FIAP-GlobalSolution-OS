@@ -1,0 +1,32 @@
+[Unit]
+Description=RotaAlerta - Aplicação Web CitizenTech
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=rotaalerta
+Group=rotaalerta
+WorkingDirectory=@APP_DIR@
+EnvironmentFile=/etc/rotaalerta/rotaalerta.env
+ExecStart=/usr/bin/node @APP_DIR@/server.js
+Restart=always
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log/rotaalerta
+LockPersonality=true
+RestrictSUIDSGID=true
+LimitNOFILE=4096
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=rotaalerta
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,51 @@
+● rotaalerta.service - RotaAlerta - Aplicação Web CitizenTech
+     Loaded: loaded (/etc/systemd/system/rotaalerta.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2026-11-19 19:22:31 UTC; 21min ago
+ Invocation: 7eb38f9e299d4529acf2b0a60f68733c
+   Main PID: 1816 (node-MainThread)
+      Tasks: 11 (limit: 8597)
+     Memory: 116M (peak: 116.5M)
+        CPU: 504ms
+     CGroup: /system.slice/rotaalerta.service
+             └─1816 /usr/bin/node /opt/rotaalerta/server.js
+
+Nov 19 19:22:31 rotaalerta-server systemd[1]: Started rotaalerta.service - RotaAlerta - Aplicação Web CitizenTech.
+Nov 19 19:22:40 rotaalerta-server rotaalerta[1816]: 2026-11-19T19:22:39.778Z INFO Servidor RotaAlerta iniciado {"host":"127.0.0.1","port":3000,"node":"v26.13.1"}
+Nov 19 19:40:47 rotaalerta-server rotaalerta[1816]: 2026-11-19T19:40:47.908Z INFO Verificação de rota executada {"routine":"Faculdade","scenario":"normal","status":"ok","delayMinutes":0}
+
+● rotaalerta-monitor.service - RotaAlerta - Monitor de CPU, Memória e Disco
+     Loaded: loaded (/etc/systemd/system/rotaalerta-monitor.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2026-11-19 19:43:46 UTC; 265ms ago
+ Invocation: c055945ec7cc46c6a7c4eb8839e5723a
+   Main PID: 5936 (bash)
+      Tasks: 2 (limit: 8597)
+     Memory: 2.5M (peak: 3.5M)
+        CPU: 65ms
+     CGroup: /system.slice/rotaalerta-monitor.service
+             ├─5936 /usr/bin/bash /opt/rotaalerta/ops/scripts/03-monitor.sh
+             └─5973 sleep 1
+
+Nov 19 19:43:46 rotaalerta-server systemd[1]: Started rotaalerta-monitor.service - RotaAlerta - Monitor de CPU, Memória e Disco.
+Nov 19 19:43:46 rotaalerta-server rotaalerta-monitor[5967]: 2026-11-19T19:43:46+00:00 [INFO] Monitor iniciado: intervalo=30s; limites CPU=85% RAM=85% DISCO=85%
+
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: active (running) since Thu 2026-11-19 19:22:31 UTC; 21min ago
+ Invocation: a95c048b330e4834a78e125489b0fa8e
+       Docs: man:nginx(8)
+    Process: 1805 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 1825 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+   Main PID: 1834 (nginx)
+      Tasks: 6 (limit: 8597)
+     Memory: 7.5M (peak: 8.5M)
+        CPU: 10.108s
+     CGroup: /system.slice/nginx.service
+             ├─1834 "nginx: master process /usr/sbin/nginx -g daemon on; master_process on;"
+             ├─1835 "nginx: worker process"
+             ├─1836 "nginx: worker process"
+             ├─1837 "nginx: worker process"
+             ├─1838 "nginx: worker process"
+             └─1839 "nginx: worker process"
+
+Nov 19 19:22:31 rotaalerta-server systemd[1]: Starting nginx.service - A high performance web server and a reverse proxy server...
+Nov 19 19:22:31 rotaalerta-server systemd[1]: Started nginx.service - A high performance web server and a reverse proxy server.

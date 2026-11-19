@@ -1,0 +1,62 @@
+2026-11-19T00:59:27+00:00 Início do teste de falha. Testes: app monitor. Evidência: /home/vboxuser/Downloads/rotaalerta-main/os/evidencias/teste-falha-20261119-005927.txt
+2026-11-19T00:59:27+00:00 === TESTE 1: queda do processo Node (SIGKILL) e recuperação pelo systemd ===
+$ systemctl show rotaalerta.service -p Restart -p RestartUSec -p NRestarts
+Restart=always
+RestartUSec=5s
+NRestarts=0
+2026-11-19T00:59:27+00:00 Estado inicial: MainPID=1981 NRestarts=0; health check OK.
+2026-11-19T00:59:27+00:00 Injetando falha: systemctl kill --signal=SIGKILL rotaalerta.service
+$ systemctl status rotaalerta.service --no-pager --lines=0
+● rotaalerta.service - RotaAlerta - Aplicação Web CitizenTech
+     Loaded: loaded (/etc/systemd/system/rotaalerta.service; enabled; preset: enabled)
+     Active: activating (auto-restart) (Result: signal) since Thu 2026-11-19 00:59:27 UTC; 1s ago
+ Invocation: 4b42bdf5649f4fb08db066483020f023
+    Process: 1981 ExecStart=/usr/bin/node /opt/rotaalerta/server.js (code=killed, signal=KILL)
+   Main PID: 1981 (code=killed, signal=KILL)
+   Mem peak: 116.4M
+        CPU: 782ms
+2026-11-19T00:59:34+00:00 Aplicação voltou a responder em 7s: MainPID=19550 NRestarts=1.
+$ curl --silent --max-time 3 http://127.0.0.1:3000/api/health
+{"status":"ok","service":"rotaalerta-web","uptimeSeconds":0,"nodeVersion":"v26.13.1","timestamp":"2026-11-19T00:59:34.209Z"}
+2026-11-19T00:59:34+00:00 Nginx na porta 80 também voltou a servir a página.
+$ journalctl -u rotaalerta.service -n 8 --no-pager -o short-iso
+2026-11-19T00:59:27+00:00 rotaalerta-server systemd[1]: rotaalerta.service: Sent signal SIGKILL to main process 1981 (node-MainThread) on client request.
+2026-11-19T00:59:27+00:00 rotaalerta-server systemd[1]: rotaalerta.service: Killed unit cgroup '/system.slice/rotaalerta.service' with SIGKILL on client request.
+2026-11-19T00:59:27+00:00 rotaalerta-server systemd[1]: rotaalerta.service: Main process exited, code=killed, status=9/KILL
+2026-11-19T00:59:27+00:00 rotaalerta-server systemd[1]: rotaalerta.service: Failed with result 'signal'.
+2026-11-19T00:59:27+00:00 rotaalerta-server systemd[1]: rotaalerta.service: Consumed 782ms CPU time over 1h 16min 41.964s wall clock time, 116.4M memory peak.
+2026-11-19T00:59:33+00:00 rotaalerta-server systemd[1]: rotaalerta.service: Scheduled restart job, restart counter is at 1.
+2026-11-19T00:59:33+00:00 rotaalerta-server systemd[1]: Started rotaalerta.service - RotaAlerta - Aplicação Web CitizenTech.
+2026-11-19T00:59:33+00:00 rotaalerta-server rotaalerta[19550]: 2026-11-19T00:59:33.453Z INFO Servidor RotaAlerta iniciado {"host":"127.0.0.1","port":3000,"node":"v26.13.1"}
+2026-11-19T00:59:34+00:00 RESULTADO app-recuperacao: PASSOU - PID 1981 -> 19550; recuperado em 7s pelo systemd
+2026-11-19T00:59:34+00:00 === TESTE 2: queda do serviço de monitoramento (SIGKILL) ===
+$ systemctl show rotaalerta-monitor.service -p Restart -p RestartUSec -p StartLimitIntervalUSec -p NRestarts
+StartLimitIntervalUSec=0
+Restart=always
+RestartUSec=10s
+NRestarts=1
+2026-11-19T00:59:34+00:00 Estado inicial: MainPID=15600.
+2026-11-19T00:59:34+00:00 Injetando falha: systemctl kill --signal=SIGKILL rotaalerta-monitor.service
+$ systemctl status rotaalerta-monitor.service --no-pager --lines=0
+● rotaalerta-monitor.service - RotaAlerta - Monitor de CPU, Memória e Disco
+     Loaded: loaded (/etc/systemd/system/rotaalerta-monitor.service; enabled; preset: enabled)
+     Active: activating (auto-restart) (Result: signal) since Thu 2026-11-19 00:59:34 UTC; 1s ago
+ Invocation: 32b5266f88e04a9e92c30e99b5f69614
+    Process: 15600 ExecStart=/usr/bin/bash /opt/rotaalerta/ops/scripts/03-monitor.sh (code=killed, signal=KILL)
+   Main PID: 15600 (code=killed, signal=KILL)
+   Mem peak: 4.5M
+        CPU: 6.050s
+2026-11-19T00:59:44+00:00 Monitor reiniciado em 10s: MainPID=19639. Novas linhas de monitor.log:
+2026-11-19T00:59:44+00:00 [INFO] Monitor iniciado: intervalo=30s; limites CPU=85% RAM=85% DISCO=85%
+$ journalctl -u rotaalerta-monitor.service -n 6 --no-pager -o short-iso
+2026-11-19T00:59:34+00:00 rotaalerta-server systemd[1]: rotaalerta-monitor.service: Main process exited, code=killed, status=9/KILL
+2026-11-19T00:59:34+00:00 rotaalerta-server systemd[1]: rotaalerta-monitor.service: Failed with result 'signal'.
+2026-11-19T00:59:34+00:00 rotaalerta-server systemd[1]: rotaalerta-monitor.service: Consumed 6.050s CPU time over 1h 2min 51.741s wall clock time, 4.5M memory peak.
+2026-11-19T00:59:44+00:00 rotaalerta-server systemd[1]: rotaalerta-monitor.service: Scheduled restart job, restart counter is at 2.
+2026-11-19T00:59:44+00:00 rotaalerta-server systemd[1]: Started rotaalerta-monitor.service - RotaAlerta - Monitor de CPU, Memória e Disco.
+2026-11-19T00:59:44+00:00 rotaalerta-server rotaalerta-monitor[19652]: 2026-11-19T00:59:44+00:00 [INFO] Monitor iniciado: intervalo=30s; limites CPU=85% RAM=85% DISCO=85%
+2026-11-19T00:59:44+00:00 RESULTADO monitor-recuperacao: PASSOU - PID 15600 -> 19639; voltou a logar em 10s
+2026-11-19T00:59:44+00:00 === RESUMO ===
+app-recuperacao        PASSOU   PID 1981 -> 19550; recuperado em 7s pelo systemd
+monitor-recuperacao    PASSOU   PID 15600 -> 19639; voltou a logar em 10s
+2026-11-19T00:59:44+00:00 Evidência salva em: /home/vboxuser/Downloads/rotaalerta-main/os/evidencias/teste-falha-20261119-005927.txt

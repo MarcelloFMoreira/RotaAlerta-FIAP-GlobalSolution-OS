@@ -1,0 +1,191 @@
+2026-11-18T01:10:24+00:00 [INFO] Início do deploy do RotaAlerta. APP_DIR=/opt/rotaalerta
+Hit:1 http://archive.ubuntu.com/ubuntu resolute InRelease
+Hit:2 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (8.18.0-1ubuntu2.8).
+ca-certificates is already the newest version (20260816ubuntu0.26.04.2).
+ca-certificates set to manually installed.
+gnupg is already the newest version (2.4.8-4ubuntu3.1).
+gnupg set to manually installed.
+rsync is already the newest version (3.4.1+ds1-7ubuntu0.3).
+libatomic1 is already the newest version (16-20260322-1ubuntu1).
+libatomic1 set to manually installed.
+Solving dependencies...
+The following packages were automatically installed and are no longer required:
+  linux-headers-7.0.0-30 linux-headers-7.0.0-30-generic
+  linux-image-unsigned-7.0.0-30-generic
+  linux-main-modules-zfs-7.0.0-30-generic linux-modules-7.0.0-30-generic
+  linux-tools-7.0.0-30 linux-tools-7.0.0-30-generic
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  nginx-common
+Suggested packages:
+  fcgiwrap nginx-doc
+The following NEW packages will be installed:
+  nginx nginx-common
+0 upgraded, 2 newly installed, 0 to remove and 263 not upgraded.
+Need to get 656 kB of archives.
+After this operation, 1,864 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 nginx-common all 1.28.3-2ubuntu1.12 [38.2 kB]
+Get:2 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 nginx amd64 1.28.3-2ubuntu1.12 [618 kB]
+Preconfiguring packages ...
+Fetched 656 kB in 2s (367 kB/s)
+Selecting previously unselected package nginx-common.
+(Reading database… (Reading database… 5%(Reading database… 10%(Reading database… 15%(Reading database… 20%(Reading database… 25%(Reading database… 30%(Reading database… 35%(Reading database… 40%(Reading database… 45%(Reading database… 50%(Reading database… 55%(Reading database… 60%(Reading database… 65%(Reading database… 70%(Reading database… 75%(Reading database… 80%(Reading database… 85%(Reading database… 90%(Reading database… 95%(Reading database… 100%(Reading database… 194932 files and directories currently installed.)
+Preparing to unpack …/nginx-common_1.28.3-2ubuntu1.12_all.deb…
+Unpacking nginx-common (1.28.3-2ubuntu1.12)…
+Selecting previously unselected package nginx.
+Preparing to unpack …/nginx_1.28.3-2ubuntu1.12_amd64.deb…
+Unpacking nginx (1.28.3-2ubuntu1.12)…
+Setting up nginx-common (1.28.3-2ubuntu1.12)…
+Created symlink '/etc/systemd/system/multi-user.target.wants/nginx.service' → '/usr/lib/systemd/system/nginx.service'.
+/usr/sbin/policy-rc.d returned 101, not running 'start nginx.service'
+Setting up nginx (1.28.3-2ubuntu1.12)…
+invoke-rc.d: policy-rc.d denied execution of start.
+Processing triggers for man-db (2.13.1-1build1)…
+Processing triggers for ufw (0.36.2-9build1)…
+2026-11-18T01:10:32+00:00 [INFO] Instalando Node.js 26 LTS (versão encontrada: 0).
+[38;5;79m2026-11-18 01:10:32 - Installing pre-requisites[0m
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Hit:1 http://archive.ubuntu.com/ubuntu resolute InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:3 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+Reading package lists...
+Building dependency tree...
+Reading state information...
+263 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+ca-certificates is already the newest version (20260816ubuntu0.26.04.2).
+curl is already the newest version (8.18.0-1ubuntu2.8).
+gnupg is already the newest version (2.4.8-4ubuntu3.1).
+Solving dependencies...
+The following packages were automatically installed and are no longer required:
+  linux-headers-7.0.0-30                   linux-modules-7.0.0-30-generic
+  linux-headers-7.0.0-30-generic           linux-tools-7.0.0-30
+  linux-image-unsigned-7.0.0-30-generic    linux-tools-7.0.0-30-generic
+  linux-main-modules-zfs-7.0.0-30-generic
+Use 'sudo apt autoremove' to remove them.
+
+Upgrading:
+  apt  libapt-pkg7.0
+
+Installing:
+  apt-transport-https
+
+Summary:
+  Upgrading: 2, Installing: 1, Removing: 0, Not Upgrading: 261
+  Download size: 26.0 kB / 2,672 kB
+  Space needed: 36.9 kB / 17.2 GB available
+
+Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/universe amd64 apt-transport-https all 3.2.1ubuntu0.1 [26.0 kB]
+Fetched 26.0 kB in 1s (41.8 kB/s)
+(Reading database… (Reading database… 5%(Reading database… 10%(Reading database… 15%(Reading database… 20%(Reading database… 25%(Reading database… 30%(Reading database… 35%(Reading database… 40%(Reading database… 45%(Reading database… 50%(Reading database… 55%(Reading database… 60%(Reading database… 65%(Reading database… 70%(Reading database… 75%(Reading database… 80%(Reading database… 85%(Reading database… 90%(Reading database… 95%(Reading database… 100%(Reading database… 194979 files and directories currently installed.)
+Preparing to unpack …/libapt-pkg7.0_3.2.1ubuntu0.1_amd64.deb…
+Unpacking libapt-pkg7.0:amd64 (3.2.1ubuntu0.1) over (3.2.0)…
+Setting up libapt-pkg7.0:amd64 (3.2.1ubuntu0.1)…
+(Reading database… (Reading database… 5%(Reading database… 10%(Reading database… 15%(Reading database… 20%(Reading database… 25%(Reading database… 30%(Reading database… 35%(Reading database… 40%(Reading database… 45%(Reading database… 50%(Reading database… 55%(Reading database… 60%(Reading database… 65%(Reading database… 70%(Reading database… 75%(Reading database… 80%(Reading database… 85%(Reading database… 90%(Reading database… 95%(Reading database… 100%(Reading database… 194979 files and directories currently installed.)
+Preparing to unpack …/apt_3.2.1ubuntu0.1_amd64.deb…
+Unpacking apt (3.2.1ubuntu0.1) over (3.2.0)…
+Setting up apt (3.2.1ubuntu0.1)…
+/usr/sbin/policy-rc.d returned 101, not running 'restart apt-daily-upgrade.timer apt-daily.timer'
+Selecting previously unselected package apt-transport-https.
+(Reading database… (Reading database… 5%(Reading database… 10%(Reading database… 15%(Reading database… 20%(Reading database… 25%(Reading database… 30%(Reading database… 35%(Reading database… 40%(Reading database… 45%(Reading database… 50%(Reading database… 55%(Reading database… 60%(Reading database… 65%(Reading database… 70%(Reading database… 75%(Reading database… 80%(Reading database… 85%(Reading database… 90%(Reading database… 95%(Reading database… 100%(Reading database… 194979 files and directories currently installed.)
+Preparing to unpack …/apt-transport-https_3.2.1ubuntu0.1_all.deb…
+Unpacking apt-transport-https (3.2.1ubuntu0.1)…
+Setting up apt-transport-https (3.2.1ubuntu0.1)…
+Processing triggers for man-db (2.13.1-1build1)…
+Processing triggers for libc-bin (2.43-2ubuntu2.3)…
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Get:1 https://deb.nodesource.com/node_26.x nodistro InRelease [12.1 kB]
+Get:2 https://deb.nodesource.com/node_26.x nodistro/main amd64 Packages [5,676 B]
+Hit:3 http://security.ubuntu.com/ubuntu resolute-security InRelease
+Hit:4 http://archive.ubuntu.com/ubuntu resolute InRelease
+Hit:5 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:6 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+Fetched 17.8 kB in 1s (21.6 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+261 packages can be upgraded. Run 'apt list --upgradable' to see them.
+[1;34m2026-11-18 01:10:47 - Repository configured successfully.[0m
+[38;5;79m2026-11-18 01:10:47 - To install Node.js, run: apt install nodejs -y[0m
+[38;5;79m2026-11-18 01:10:47 - You can use N|solid Runtime as a node.js alternative[0m
+[1;32m2026-11-18 01:10:47 - To install N|solid Runtime, run: apt install nsolid -y 
+[0m
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Solving dependencies...
+The following packages were automatically installed and are no longer required:
+  linux-headers-7.0.0-30 linux-headers-7.0.0-30-generic
+  linux-image-unsigned-7.0.0-30-generic
+  linux-main-modules-zfs-7.0.0-30-generic linux-modules-7.0.0-30-generic
+  linux-tools-7.0.0-30 linux-tools-7.0.0-30-generic
+Use 'sudo apt autoremove' to remove them.
+The following NEW packages will be installed:
+  nodejs
+0 upgraded, 1 newly installed, 0 to remove and 261 not upgraded.
+Need to get 42.3 MB of archives.
+After this operation, 290 MB of additional disk space will be used.
+Get:1 https://deb.nodesource.com/node_26.x nodistro/main amd64 nodejs amd64 26.13.1-1nodesource1 [42.3 MB]
+Fetched 42.3 MB in 4s (11.2 MB/s)
+Selecting previously unselected package nodejs.
+(Reading database… (Reading database… 5%(Reading database… 10%(Reading database… 15%(Reading database… 20%(Reading database… 25%(Reading database… 30%(Reading database… 35%(Reading database… 40%(Reading database… 45%(Reading database… 50%(Reading database… 55%(Reading database… 60%(Reading database… 65%(Reading database… 70%(Reading database… 75%(Reading database… 80%(Reading database… 85%(Reading database… 90%(Reading database… 95%(Reading database… 100%(Reading database… 194983 files and directories currently installed.)
+Preparing to unpack …/nodejs_26.13.1-1nodesource1_amd64.deb…
+Unpacking nodejs (26.13.1-1nodesource1)…
+Setting up nodejs (26.13.1-1nodesource1)…
+Processing triggers for man-db (2.13.1-1build1)…
+2026-11-18T01:11:06+00:00 [INFO] Node.js instalado: v26.13.1; npm 11.20.0
+2026-11-18T01:11:06+00:00 [INFO] Arquivos da aplicação publicados em /opt/rotaalerta
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+Synchronizing state of nginx.service with SysV service script with /usr/lib/systemd/systemd-sysv-install.
+Executing: /usr/lib/systemd/systemd-sysv-install enable nginx
+Created symlink '/etc/systemd/system/multi-user.target.wants/rotaalerta.service' → '/etc/systemd/system/rotaalerta.service'.
+Created symlink '/etc/systemd/system/multi-user.target.wants/rotaalerta-monitor.service' → '/etc/systemd/system/rotaalerta-monitor.service'.
+nginx.service is not active, cannot reload.
+2026-11-18T01:11:08+00:00 [INFO] Aguardando health check da aplicação na porta 3000.
+{"status":"ok","service":"rotaalerta-web","uptimeSeconds":0,"nodeVersion":"v26.13.1","timestamp":"2026-11-18T01:11:08.799Z"}
+2026-11-18T01:11:08+00:00 [INFO] Serviços ativos:
+● rotaalerta.service - RotaAlerta - Aplicação Web CitizenTech
+     Loaded: loaded (/etc/systemd/system/rotaalerta.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-11-18 01:11:08 UTC; 322ms ago
+ Invocation: efbb065961344e6a97cd3f711c3e2fae
+   Main PID: 21002 (node-MainThread)
+      Tasks: 11 (limit: 8598)
+     Memory: 11.8M (peak: 11.8M)
+        CPU: 91ms
+     CGroup: /system.slice/rotaalerta.service
+● rotaalerta-monitor.service - RotaAlerta - Monitor de CPU, Memória e Disco
+     Loaded: loaded (/etc/systemd/system/rotaalerta-monitor.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-11-18 01:11:08 UTC; 326ms ago
+ Invocation: 4700b60afb0f4935a64fcc5b4703066d
+   Main PID: 21005 (bash)
+      Tasks: 2 (limit: 8598)
+     Memory: 2.3M (peak: 3.5M)
+        CPU: 78ms
+     CGroup: /system.slice/rotaalerta-monitor.service
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/usr/lib/systemd/system/nginx.service; enabled; preset: enabled)
+     Active: active (running) since Wed 2026-11-18 01:11:08 UTC; 257ms ago
+ Invocation: 26e0d0947b29445b99c3c2e94d4b32b9
+       Docs: man:nginx(8)
+    Process: 21016 ExecStartPre=/usr/sbin/nginx -t -q -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+    Process: 21029 ExecStart=/usr/sbin/nginx -g daemon on; master_process on; (code=exited, status=0/SUCCESS)
+2026-11-18T01:11:08+00:00 [INFO] Deploy concluído. Descubra o IP com: hostname -I
+2026-11-18T01:11:08+00:00 [INFO] Execução concluída com sucesso: 02-deploy-app
